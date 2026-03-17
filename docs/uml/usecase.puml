@@ -1,0 +1,29 @@
+@startuml UseCase
+left to right direction
+skinparam actorStyle awesome
+
+title Colors Web Application - Use Case Diagram
+
+actor "User" as user
+actor "MySQL Database" as db
+
+rectangle "Colors Web Application" {
+    usecase "Login" as UC1
+    usecase "Logout" as UC2
+    usecase "Add Color" as UC3
+    usecase "Search Colors" as UC4
+    usecase "View Color Results" as UC5
+
+    UC4 ..> UC5 : <<includes>>
+}
+
+user --> UC1
+user --> UC2
+user --> UC3
+user --> UC4
+
+UC1 --> db
+UC3 --> db
+UC4 --> db
+
+@enduml

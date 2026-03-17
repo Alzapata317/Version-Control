@@ -1,0 +1,59 @@
+@startuml Activity
+title Colors Web Application - Activity Diagram
+
+start
+
+:User opens application;
+:Display Login Page (index.html);
+
+:User enters Username and Password;
+:Send POST request to Login.php;
+
+if (Credentials valid?) then (yes)
+    :Receive userId, firstName, lastName;
+    :Save user data to browser cookie\n(20-minute expiration);
+    :Redirect to Color Management Page\n(color.html);
+    :Read cookie and restore session;
+
+    if (Valid cookie with userId?) then (yes)
+        :Display Color Management Page\nwith user greeting;
+
+        repeat
+            switch (User Action?)
+            case (Search Color)
+                :User enters search term;
+                :Send POST request to\nSearchColors.php with\nsearch term and userId;
+                if (Colors found?) then (yes)
+                    :Display matching\ncolor list;
+                else (no)
+                    :Display\n"No Records Found";
+                endif
+
+            case (Add Color)
+                :User enters color name;
+                :Send POST request to\nAddColor.php with\ncolor name and userId;
+                if (Color added successfully?) then (yes)
+                    :Display success\nconfirmation;
+                else (no)
+                    :Display error\nmessage;
+                endif
+
+            case (Logout)
+                :Clear user variables;
+                :Delete browser cookie;
+                :Redirect to Login Page;
+                stop
+            endswitch
+        repeat while (Continue using app?)
+
+    else (no)
+        :Redirect to Login Page;
+    endif
+
+else (no)
+    :Display "User/Password\ncombination incorrect";
+endif
+
+stop
+
+@enduml

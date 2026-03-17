@@ -1,0 +1,66 @@
+@startuml Class
+title Colors Web Application - Class Diagram
+
+skinparam classAttributeIconSize 0
+
+class "User" as User {
+    - ID : int <<PK>>
+    - FirstName : varchar
+    - LastName : varchar
+    - Login : varchar
+    - Password : varchar
+}
+
+class "Color" as Color {
+    - ID : int <<PK>>
+    - Name : varchar
+    - UserID : int <<FK>>
+}
+
+class "LoginAPI" as LoginAPI <<API Endpoint>> {
+    + login(login: string, password: string) : JSON
+}
+
+class "AddColorAPI" as AddColorAPI <<API Endpoint>> {
+    + addColor(color: string, userId: int) : JSON
+}
+
+class "SearchColorsAPI" as SearchColorsAPI <<API Endpoint>> {
+    + searchColors(search: string, userId: int) : JSON
+}
+
+class "DatabaseConfig" as Config <<Configuration>> {
+    - DB_HOST : string
+    - DB_USER : string
+    - DB_PASS : string
+    - DB_NAME : string
+    + getDbConnection() : mysqli
+}
+
+class "FrontendController" as Frontend <<JavaScript>> {
+    - userId : int
+    - firstName : string
+    - lastName : string
+    + doLogin() : void
+    + doLogout() : void
+    + addColor() : void
+    + searchColor() : void
+    + saveCookie() : void
+    + readCookie() : void
+}
+
+User "1" -- "0..*" Color : owns >
+
+LoginAPI ..> User : queries
+AddColorAPI ..> Color : inserts
+SearchColorsAPI ..> Color : queries
+
+LoginAPI ..> Config : uses
+AddColorAPI ..> Config : uses
+SearchColorsAPI ..> Config : uses
+
+Frontend ..> LoginAPI : calls
+Frontend ..> AddColorAPI : calls
+Frontend ..> SearchColorsAPI : calls
+
+@enduml
