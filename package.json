@@ -1,0 +1,32 @@
+{
+  "name": "version-control",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "COLORS is a simple LAMP-stack web app where users log in, search their saved colors, and add new colors tied to their account. It demonstrates end-to-end integration between a browser frontend, PHP API endpoints, and a MySQL database.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "lint:html": "htmlhint **/*.html",
+    "lint:css": "stylelint **/*.css",
+    "lint:js": "eslint **/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alzapata317/Version-Control.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alzapata317/Version-Control/issues"
+  },
+  "homepage": "https://github.com/Alzapata317/Version-Control#readme",
+  "devDependencies": {
+    "eslint": "^10.1.0",
+    "htmlhint": "^1.9.2",
+    "stylelint": "^17.6.0",
+    "stylelint-config-standard": "^40.0.0"
+  }
+}
