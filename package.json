@@ -10,7 +10,7 @@
   "scripts": {
     "lint:html": "htmlhint **/*.html",
     "lint:css": "stylelint **/*.css",
-    "lint:js": "eslint **/*.js",
+    "lint:js": "eslint . --ext .js",
     "test": "node --experimental-vm-modules node_modules/.bin/jest",
     "lint": "eslint ."
   },
