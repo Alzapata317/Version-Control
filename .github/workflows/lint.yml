@@ -28,3 +28,6 @@ jobs:
 
       - name: Lint JavaScript
         run: npm run lint:js
+
+      - name: Run tests
+        run: npm test
